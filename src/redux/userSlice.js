@@ -280,6 +280,8 @@ const userSlice = createSlice({
 });
 
 export const {
+    setFilteredProducts,
+    getCustomersListFailed,
     authRequest,
     underControl,
     stuffAdded,

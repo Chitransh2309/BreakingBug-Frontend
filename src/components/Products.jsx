@@ -10,17 +10,18 @@ import { addStuff } from '../redux/userHandle';
 
 const Products = ({}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize navigate
 
   const itemsPerPage = 9;
 
-  const { currentRole, responseSearch } = useSelector();
+  const { currentRole, responseSearch } = useSelector((state) => state.yourReducer); // Adjust your selector
   const [currentPage, setCurrentPage] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
 
   const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem + itemsPerPage;
-  const currentItems = (indexOfFirstItem, indexOfLastItem);
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage; // Fix the calculation logic
+  const currentItems = responseSearch.slice(indexOfFirstItem, indexOfLastItem);
 
   const handleAddToCart = (event, product) => {
     event.stopPropagation();
@@ -49,7 +50,7 @@ const Products = ({}) => {
         {currentItems.map((data, index) => (
           <Grid item xs={12} sm={6} md={4}
             key={index}
-            onClick={() => navigate("/product/view/" + data._id)}
+            onClick={() => navigate("/product/view/" + data._id)} // Use navigate
             sx={{ cursor: "pointer" }}
           >
             <ProductContainer>
@@ -86,10 +87,10 @@ const Products = ({}) => {
 
       <Container sx={{ mt: 10, mb: 10, display: "flex", justifyContent: 'center', alignItems: "center" }}>
         <Pagination
-          count={Math.ceil(productData.length / itemsPerPage)}
+          count={Math.ceil(responseSearch.length / itemsPerPage)} // Use responseSearch instead of productData
           page={currentPage}
           color="secondary"
-
+          onChange={(event, value) => setCurrentPage(value)} // Handle page change
         />
       </Container>
 
@@ -99,6 +100,7 @@ const Products = ({}) => {
 };
 
 export default Products;
+
 
 const ProductContainer = styled.div`
   display: flex;

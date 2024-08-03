@@ -5,7 +5,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 import { Box, Button } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchProductDetailsFromCart } from '../../../redux/userSlice';
 
@@ -93,7 +93,7 @@ const OrderSummary = ({ handleNext, handleBack }) => {
                         <ListItem sx={{ py: 1, px: 0 }}>
                             <ListItemText primary="Discount" />
                             <Typography variant="subtitle1" sx={{ color: "green" }}>
-                                ₹{totalamount - totalNewPrice}
+                                ₹{totalOGPrice - totalNewPrice}
                             </Typography>
                         </ListItem>
                         <ListItem sx={{ py: 1, px: 0 }}>

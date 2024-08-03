@@ -11,20 +11,18 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { useSelector } from 'react-redux';
 
 const SideBar = () => {
-
-    
-
     const { currentRole } = useSelector(state => state.user);
+    const location = useLocation(); // Get the current location object
 
     return (
         <>
             <React.Fragment>
                 <ListItemButton
                     component={Link} to="/"
-                    sx={(location.pathname === "/" || location.pathname === "/Seller/dashboard") ? styles.currentStyle : styles.normalStyle}
+                    sx={location.pathname === "/" || location.pathname === "/Seller/dashboard" ? styles.currentStyle : styles.normalStyle}
                 >
                     <ListItemIcon>
-                        <WidgetsIcon sx={{ color: (location.pathname === "/" || location.pathname === "/Seller/dashboard") ? '#4d1c9c' : 'inherit' }} />
+                        <WidgetsIcon sx={{ color: location.pathname === "/" || location.pathname === "/Seller/dashboard" ? '#4d1c9c' : 'inherit' }} />
                     </ListItemIcon>
                     <ListItemText primary="Home" />
                 </ListItemButton>
